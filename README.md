@@ -29,7 +29,34 @@ pip install pydantic email-validator
 pip install alembic
 pip install python-dotenv
 ```
+### Explicando as dependências:
 
+| Lib | Função |
+| --- | --- |
+| **fastapi** | Framework principal (rotas, validações, docs automáticas) |
+| **uvicorn** | Servidor ASGI |
+| **sqlalchemy** | ORM oficial para banco de dados |
+| **psycopg2-binary** | Driver PostgreSQL |
+| **python-jose** | Geração e validação de tokens JWT |
+| **passlib[bcrypt]** | Criptografia de senhas |
+| **pydantic** | Validação e tipagem de dados (DTOs) |
+| **email-validator** | Validação automática de e-mails |
+| **alembic** | Migrations do banco |
+| **python-dotenv** | Ler variáveis de ambiente (.env) |
+
+### Executando
+```uvicorn main:app --reload```
+
+## Fluxo de comunicação
+```
+[ Interface (controllers) ]
+        ↓
+[ Application (use cases) ]
+        ↓
+[ Domain (interfaces, entidades) ]
+        ↓
+[ Infrastructure (implementações concretas) ]
+```
 
 ## Descrição do desafio
 Link: [Descrição do desafio](descrição.md)
