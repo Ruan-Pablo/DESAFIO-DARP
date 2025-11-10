@@ -1,12 +1,34 @@
 ﻿# DESAFIO-DARP
-Aqui conterá os detalhes da aplicação desenvolvida para atender o desafio da Darp.
+Aqui conterá os detalhes da aplicação desenvolvida para atender o desafio da Darp. Infelizmente não está completa.
 
 # Decisões arquiteturais
 
 Clean Arquiteture + Repository Pattern
 
-# Tecnologias utilizadas
+## Estrutura de pastas da Clean Arquiteture
+```
+src/
+├─ domain/ → Entidades e interfaces (regras de negócio puras)
+│ ├─ entities/ → Classes de domínio (Usuario, Produto)
+│ └─ repositories/ → Interfaces dos repositórios
+│
+├─ application/ → Casos de uso (regras de aplicação)
+│ ├─ dtos/ → Modelos de entrada e saída (Pydantic)
+│ └─ use_cases/ → Lógica de aplicação (login, registro, CRUD)
+│
+├─ infrastructure/ → Implementações técnicas (banco, segurança)
+│ ├─ db/ → Conexão e modelos SQLAlchemy
+│ ├─ repositories/ → Implementações concretas dos repositórios
+│ └─ security/ → JWT, hash e dependências
+│
+├─ interface/ → Camada de entrada (controllers FastAPI)
+│ └─ api/ → Endpoints RESTful
+│
+└─ main.py → Ponto de entrada da aplicação
+```
 
+# Tecnologias utilizadas
+- Linguagem: Python 3.11
 - Framework: FastAPI
 - ORM: SQLAlchemy ORM
 - Arquitetura: Clean Architecture (Domain / Application / Infrastructure / Interface)
@@ -15,7 +37,6 @@ Clean Arquiteture + Repository Pattern
 - Validação e DTOs: Pydantic
 - Migrations SQLAlchemy: alembic
 - Documentação: Swagger automático do FastAPI (/docs)
-- Docker: Dockerfile + docker-compose.yml (Postgres + app)
 
 # Dependencias
 - Ambiente virtual python: venv
@@ -24,8 +45,8 @@ Para instalar as dependencias utilize `pip install`
 
 ```
 pip install fastapi uvicorn sqlalchemy psycopg2-binary
-pip install python-jose[cryptography] passlib[bcrypt]
-pip install pydantic email-validator
+pip install python-jose passlib
+pip install pydantic 
 pip install alembic
 pip install python-dotenv
 ```
@@ -38,13 +59,19 @@ pip install python-dotenv
 | **sqlalchemy** | ORM oficial para banco de dados |
 | **psycopg2-binary** | Driver PostgreSQL |
 | **python-jose** | Geração e validação de tokens JWT |
-| **passlib[bcrypt]** | Criptografia de senhas |
+| **passlib[pbkdf2_sha256]** | Criptografia de senhas |
 | **pydantic** | Validação e tipagem de dados (DTOs) |
-| **email-validator** | Validação automática de e-mails |
 | **alembic** | Migrations do banco |
 | **python-dotenv** | Ler variáveis de ambiente (.env) |
 
-### Executando
+> As dependencias estão em [requirements.txt](requirements.txt)
+```
+pip install -r requirements.txt
+```
+
+
+Para executar
+
 ```uvicorn main:app --reload```
 
 ## Fluxo de comunicação
