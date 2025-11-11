@@ -38,3 +38,15 @@ class UsuarioRepositoryImpl(UsuarioRepository):
             tipo=model.tipo,
             localizacao=model.localizacao
         )
+    def listar_todos(self) -> list[Usuario]:
+        models = self.db.query(UsuarioModel).all()
+        return [
+            Usuario(
+                id=model.id,
+                nome=model.nome,
+                email=model.email,
+                senha_hash=model.senha_hash,
+                tipo=model.tipo,
+                localizacao=model.localizacao
+            ) for model in models
+        ]
