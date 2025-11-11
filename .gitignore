@@ -1,0 +1,57 @@
+# =========================
+#  GITIGNORE - Projeto FastAPI (Desafio-DARP)
+# =========================
+
+# 🔹 Cache do Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 🔹 Ambiente virtual
+venv/
+.venv/
+env/
+.env
+
+# 🔹 Arquivos de log
+*.log
+
+# 🔹 Arquivos temporários
+*.tmp
+*.temp
+*.bak
+
+# 🔹 Banco de dados local (caso use SQLite)
+*.sqlite3
+*.db
+
+# 🔹 Configurações e credenciais locais
+.env
+.env.*
+config.local.json
+
+# 🔹 IDEs e editores
+.vscode/
+.idea/
+
+# 🔹 Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# 🔹 Testes e relatórios temporários
+.coverage
+htmlcov/
+pytest_cache/
+__pypackages__/
+
+# 🔹 Build / distribuição
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# =========================
+#  Pastas importantes
+# =========================
+# 🔸 Mantém o código principal
+!src/
