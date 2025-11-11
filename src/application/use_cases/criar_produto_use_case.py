@@ -6,13 +6,13 @@ class CriarProdutoUseCase:
 
     def execute(self, dados, produtor_id: int):
         novo = Produto(
-            id=None,
             nome=dados.nome,
             descricao=dados.descricao,
             preco=dados.preco,
             quantidade=dados.quantidade,
             categoria=dados.categoria,
             localizacao=dados.localizacao,
-            produtor_id=produtor_id
+            produtor_id=produtor_id,
         )
+
         return self.produto_repository.criar(novo)

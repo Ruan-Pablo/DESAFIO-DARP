@@ -2,25 +2,35 @@ from src.domain.entities.produto import Produto
 from src.domain.repositories.produto_repository import ProdutoRepository
 from src.infrastructure.db.models import ProdutoModel
 
-class ProdutoRepositoryImpl(ProdutoRepository):
+class ProdutoRepositoryImpl:
     def __init__(self, db):
         self.db = db
 
-    def criar(self, produto: Produto) -> Produto:
+    def criar(self, produto: Produto):
+        # 1️⃣ Converte a entidade de domínio em modelo ORM
         model = ProdutoModel(
             nome=produto.nome,
             descricao=produto.descricao,
             preco=produto.preco,
             quantidade=produto.quantidade,
-            categoria=produto.categoria,
-            localizacao=produto.localizacao,
-            produtor_id=produto.produtor_id
+            produtor_id=produto.produtor_id,
         )
+
+        # 2️⃣ Salva no banco
         self.db.add(model)
         self.db.commit()
         self.db.refresh(model)
-        return Produto(**model.__dict__)
 
+        # 3️⃣ Converte de volta para entidade de domínio
+        return Produto(
+            id=model.id,
+            nome=model.nome,
+            descricao=model.descricao,
+            preco=model.preco,
+            quantidade=model.quantidade,
+            produtor_id=model.produtor_id,
+        )
+    
     def listar_todos(self) -> list[Produto]:
         produtos = self.db.query(ProdutoModel).all()
         return [Produto(**p.__dict__) for p in produtos]

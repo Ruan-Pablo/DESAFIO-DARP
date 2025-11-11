@@ -8,7 +8,16 @@ from src.application.use_cases.criar_produto_use_case import CriarProdutoUseCase
 from src.application.use_cases.listar_produtos_use_case import ListarProdutosUseCase
 
 router = APIRouter(prefix="/produtos", tags=["Produtos"])
-
+"""
+{
+  "nome": "Teste",
+  "descricao": "lorem ipsum",
+  "preco": 1,
+  "quantidade": 1,
+  "categoria": "teste",
+  "localizacao": "teste"
+}
+"""
 @router.post("/", response_model=ProdutoOutput)
 def criar_produto(
     dados: CriarProdutoInput,
